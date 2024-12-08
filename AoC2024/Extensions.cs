@@ -1,18 +1,30 @@
+using System.Drawing;
+
 namespace AoC2024;
 
 public static class Extensions
 {
     public static bool TryGetValue<T>(this T[][] array, int i, int j, out T? value)
     {
+        return array.TryGetValue(new Point(i, i), out value);
+    }
+
+    public static bool TryGetValue<T>(this T[][] array, Point point, out T? value)
+    {
         value = default;
 
-        if (i < 0 || i >= array.Length)
+        if (point.X < 0 || point.X >= array.Length)
             return false;
 
-        if (j < 0 || j >= array[i].Length)
+        if (point.Y < 0 || point.Y >= array[point.X].Length)
             return false;
 
-        value = array[i][j];
+        value = array[point.X][point.Y];
         return true;
+    }
+
+    public static Point MoveInDirection(this Point coordinate, Point direction)
+    {
+        return new Point(coordinate.X + direction.X, coordinate.Y + direction.Y);
     }
 }

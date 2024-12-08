@@ -1,5 +1,3 @@
-using System;
-
 namespace AoC2024.Day05;
 
 public class Day05

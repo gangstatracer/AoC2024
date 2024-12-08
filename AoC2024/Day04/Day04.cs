@@ -1,7 +1,6 @@
 using System.Drawing;
-using System.Text.RegularExpressions;
 
-namespace AoC2024.Day02;
+namespace AoC2024.Day04;
 
 public class Day04
 {
@@ -23,7 +22,7 @@ public class Day04
                         sum += SearchWord(text, index, "XMAS", new Point(k, l)) ? 1 : 0;
             }
 
-        sum.Should().Be(2573);
+        sum.Should().Be(5460);
     }
 
     private static bool SearchWord(char[][] text, Point index, string query, Point direction)
