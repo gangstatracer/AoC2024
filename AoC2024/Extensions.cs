@@ -4,6 +4,17 @@ namespace AoC2024;
 
 public static class Extensions
 {
+    public static bool TryGetValue<T>(this List<T> list, int index, out T? value)
+    {
+        value = default;
+        if (index < 0)
+            return false;
+        if (index >= list.Count)
+            return false;
+        value = list[index];
+        return true;
+    }
+
     public static bool TrySetValue<T>(this T[,] array, int i, int j, T value)
     {
         return TrySetValue(array, new Point(i, j), value);
