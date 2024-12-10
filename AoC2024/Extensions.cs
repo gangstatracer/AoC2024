@@ -20,6 +20,11 @@ public static class Extensions
         return TrySetValue(array, new Point(i, j), value);
     }
 
+    public static bool TrySetValue<T>(this T[,] array, Coordinate c, T value)
+    {
+        return TrySetValue(array, new Point(c.X, c.Y), value);
+    }
+
     public static bool TrySetValue<T>(this T[,] array, Point point, T value)
     {
         if (point.X < 0 || point.X >= array.GetLength(0))
@@ -32,9 +37,24 @@ public static class Extensions
         return true;
     }
 
+    public static bool TryGetValue<T>(this T[,] array, Coordinate c, out T? value)
+    {
+        value = default;
+        var (x, y) = c;
+        if (x < 0 || x >= array.GetLength(0) || y < 0 || y >= array.GetLength(1))
+            return false;
+        value = array[x, y];
+        return true;
+    }
+
     public static bool TryGetValue<T>(this T[][] array, int i, int j, out T? value)
     {
-        return array.TryGetValue(new Point(i, i), out value);
+        return array.TryGetValue(new Point(i, j), out value);
+    }
+
+    public static bool TryGetValue<T>(this T[][] array, Coordinate c, out T? value)
+    {
+        return array.TryGetValue(new Point(c.X, c.Y), out value);
     }
 
     public static bool TryGetValue<T>(this T[][] array, Point point, out T? value)
