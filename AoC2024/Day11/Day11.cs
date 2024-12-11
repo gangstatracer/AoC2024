@@ -47,4 +47,56 @@ public class Day11
 
         result.Should().Be(expected);
     }
+
+    [TestCase("Day11/input.txt", 75, 236302670835517L)]
+    [TestCase("Day11/example.txt", 25, 55312)]
+    public void Task2(string filePath, int blinkCount, long expected)
+    {
+        var stones = File
+            .ReadAllText(filePath)
+            .Split(" ")
+            .Select(long.Parse)
+            .ToList();
+
+        var result = 0L;
+
+        foreach (var stone in stones)
+        {
+            result += CountStones(stone, blinkCount);
+        }
+
+        result.Should().Be(expected);
+    }
+
+    private static long CountStones(long stone, int blinkCount)
+    {
+        if (resultsCache.TryGetValue((stone, blinkCount), out var result))
+            return result;
+
+        if (blinkCount == 0)
+            return 1;
+
+        if (stone == 0)
+        {
+            result = CountStones(1, blinkCount - 1);
+        }
+        else
+        {
+            var stringRepresentation = stone.ToString();
+            if (stringRepresentation.Length % 2 == 0)
+            {
+                var left = int.Parse(stringRepresentation[..(stringRepresentation.Length / 2)]);
+                var right = int.Parse(stringRepresentation[(stringRepresentation.Length / 2)..]);
+                result = CountStones(left, blinkCount - 1) + CountStones(right, blinkCount - 1);
+            }
+            else
+            {
+                result = CountStones(stone * 2024, blinkCount - 1);
+            }
+        }
+        resultsCache.Add((stone, blinkCount), result);
+        return result;
+    }
+
+    private static Dictionary<(long, int), long> resultsCache = [];
 }
