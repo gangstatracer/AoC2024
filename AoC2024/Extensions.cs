@@ -4,6 +4,18 @@ namespace AoC2024;
 
 public static class Extensions
 {
+    public static void Print<T, K>(this IEnumerable<T> enumerable, TextWriter writer)
+    where T : IEnumerable<K> where K : notnull
+    {
+        foreach (var line in enumerable)
+        {
+            foreach (var element in line)
+            {
+                writer.Write(element.ToString());
+            }
+            writer.WriteLine();
+        }
+    }
     public static bool TryGetValue<T>(this List<T> list, int index, out T? value)
     {
         value = default;
