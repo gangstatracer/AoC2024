@@ -16,6 +16,29 @@ public static class Extensions
             writer.WriteLine();
         }
     }
+
+    public static void Print<T>(this T[,] array, TextWriter writer, Func<T, string>? formatValue = null)
+    {
+        for (var i = 0; i < array.GetLength(0); i++)
+        {
+            for (var j = 0; j < array.GetLength(1); j++)
+            {
+                var value = formatValue != null
+                ? formatValue(array[i, j])
+                : array[i, j] switch
+                {
+                    bool b => b ? "1" : "0",
+                    { } o => o.ToString(),
+                    _ => " ",
+                };
+
+                writer.Write(value);
+            }
+            writer.WriteLine();
+        }
+        writer.WriteLine();
+    }
+
     public static bool TryGetValue<T>(this List<T> list, int index, out T? value)
     {
         value = default;

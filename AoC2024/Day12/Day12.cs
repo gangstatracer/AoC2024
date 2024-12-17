@@ -31,7 +31,7 @@ public class Day12
         var area = 1;
         var perimeter = 0;
 
-        foreach (var (xOffset, yOffset) in Directions)
+        foreach (var (xOffset, yOffset) in CoordinateExtensions.Directions)
         {
             var next = new Coordinate(X: coordinate.X + xOffset, Y: coordinate.Y + yOffset);
 
@@ -86,7 +86,7 @@ public class Day12
         visited[coordinate.X, coordinate.Y] = true;
         var area = 1;
         var outbreaks = 0;
-        foreach (var direction in Directions)
+        foreach (var direction in CoordinateExtensions.Directions)
         {
             var next = coordinate.MoveTo(direction);
 
@@ -122,12 +122,4 @@ public class Day12
 
         return (area, outbreaks);
     }
-
-    private static readonly Coordinate[] Directions =
-    [
-        new(-1, 0),
-        new(0, 1),
-        new(1, 0),
-        new(0, -1),
-    ];
 }
