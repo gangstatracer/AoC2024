@@ -3,7 +3,7 @@ namespace AoC2024.Day18;
 public class Day18
 {
     [TestCase("Day18/example.txt", 12, 7, 22)]
-    [TestCase("Day18/input.txt", 1024, 71, 0)]
+    [TestCase("Day18/input.txt", 1024, 71, 312)]
     public void Task1(string filePath, int bytesFallen, int mapSize, int expected)
     {
         var bytes = File
@@ -18,14 +18,19 @@ public class Day18
         .ToArray();
 
         var memory = new bool[mapSize, mapSize];
-        var visited = new bool[mapSize, mapSize];
-        var distances = new int[mapSize, mapSize];
-
         for(var i = 0; i < bytesFallen; i++)
             memory.TrySetValue(bytes[i], true);
 
         // memory.Print(TestContext.Out);
 
+        BFS(memory).Should().Be(expected);
+    }
+
+    private static int BFS(bool[,] memory)
+    {
+        var mapSize = memory.GetLength(0);
+        var visited = new bool[mapSize, mapSize];
+        var distances = new int[mapSize, mapSize];
         var q = new Queue<Coordinate>();
         
         q.Enqueue(new Coordinate(0,0));
@@ -45,22 +50,35 @@ public class Day18
                 q.Enqueue(n);
             }
         }
-        // distances.Print(TestContext.Out);
-        // Search(memory, distances, new Coordinate(0,0), 0);
-        distances[mapSize - 1, mapSize - 1].Should().Be(expected);
+
+        return distances[mapSize - 1, mapSize - 1];
     }
 
-    private static void Search(bool[,] memory, int[,] distances, Coordinate c, int distance)
+    [TestCase("Day18/example.txt", 12, 7, "6,1")]
+    [TestCase("Day18/input.txt", 1024, 71, "")]
+    public void Task1(string filePath, int bytesFallen, int mapSize, string expected)
     {
-        if(!memory.TryGetValue(c, out var m) || m)
-            return;
+        var bytes = File
+        .ReadAllLines(filePath)
+        .Select(l => 
+        {
+            var parts = l.Split(',');
+            return new Coordinate(
+                int.Parse(parts[1]), 
+                int.Parse(parts[0]));
+        })
+        .ToArray();
+
+        var memory = new bool[mapSize, mapSize];
+        for(var i = 0; i < bytesFallen; i++)
+            memory.TrySetValue(bytes[i], true);
+
+        while(BFS(memory) != 0 && bytesFallen < bytes.Length){
+            memory[bytesFallen] = true;
+            bytesFallen++;
+        }
         
-        if(distances[c.X,c.Y] > distance)
-            distances[c.X, c.Y] = distance;
-        else
-            return;
-        
-        foreach(var direction in CoordinateExtensions.Directions)
-            Search(memory, distances, c.MoveTo(direction), distance + 1);
+        var last = bytes[bytesFallen - 1];
+        $"{last.X},{last.Y}".Should().Be(expected);
     }
 }
