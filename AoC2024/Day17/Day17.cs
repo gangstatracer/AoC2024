@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace AoC2024.Day17;
 
 public class Day17
@@ -43,7 +45,7 @@ public class Day17
             })
             .ToArray();
 
-        var a = 0;
+        var a = 2142029392L;
         var b = int.Parse(lines[1]);
         var c = int.Parse(lines[2]);
         var instructions = lines[3]
@@ -51,9 +53,17 @@ public class Day17
             .Select(int.Parse)
             .ToArray();
         var matched = false;
+        var timer = Stopwatch.StartNew();
         do
         {
             a++;
+
+            if (timer.Elapsed > TimeSpan.FromMinutes(1))
+            {
+                File.WriteAllTextAsync("output.txt", a.ToString());
+                timer.Restart();
+            }
+
             var machine = new Machine(a, b, c, instructions);
             try
             {
@@ -68,7 +78,7 @@ public class Day17
                 if (machine.Output.Count == instructions.Length)
                     matched = true;
             }
-            catch (WrongOutputException)
+            catch 
             {
             }
         } while (!matched);

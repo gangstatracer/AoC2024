@@ -14,7 +14,7 @@ public class RegisterValue : ComboOperand
 
     public RegisterType Type { get; init; }
 
-    public override int GetValue()
+    public override long GetValue()
     {
         return Type switch
         {

@@ -2,29 +2,29 @@
 
 namespace AoC2024.Day17;
 
-public class Machine(int a, int b, int c, int[] instructions)
+public class Machine(long a, int b, int c, int[] instructions)
 {
-    public int A { get; set; } = a;
+    public long A { get; set; } = a;
 
-    public int B { get; set; } = b;
+    public long B { get; set; } = b;
 
-    public int C { get; set; } = c;
+    public long C { get; set; } = c;
 
     public int InstructionPointer { get; set; }
 
     private int[] Instructions { get; } = instructions;
 
-    public Action<Machine, int>? OnWriteOutput { get; set; }
+    public Action<Machine, long>? OnWriteOutput { get; set; }
 
-    public void WriteOutput(int value)
+    public void WriteOutput(long value)
     {
         OnWriteOutput?.Invoke(this, value);
         _output.Add(value);
     }
 
-    private readonly List<int> _output = [];
+    private readonly List<long> _output = [];
 
-    public IReadOnlyList<int> Output => _output;
+    public IReadOnlyList<long> Output => _output;
 
     public void Execute()
     {

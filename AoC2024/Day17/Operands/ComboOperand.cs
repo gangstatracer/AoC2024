@@ -2,7 +2,7 @@
 
 public abstract class ComboOperand
 {
-    public abstract int GetValue();
+    public abstract long GetValue();
     public static ComboOperand Parse(int operand, Machine machine) =>
         operand switch
         {

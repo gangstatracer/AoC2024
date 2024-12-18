@@ -6,7 +6,7 @@ public class Literal(int value) : ComboOperand
         ? value 
         : throw new ArgumentOutOfRangeException(nameof(value));
 
-    public override int GetValue()
+    public override long GetValue()
     {
         return Value;
     }
