@@ -74,7 +74,7 @@ public class Day18
             memory.TrySetValue(bytes[i], true);
 
         while(BFS(memory) != 0 && bytesFallen < bytes.Length){
-            memory[bytesFallen] = true;
+            memory.TrySetValue(bytes[bytesFallen], true);
             bytesFallen++;
         }
         
