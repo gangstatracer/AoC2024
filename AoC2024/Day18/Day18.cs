@@ -31,6 +31,10 @@ public class Day18
             {
                 if(!visited.TryGetValue(n, out var v) || v)
                     continue;
+                
+                if(memory[n.X, n.Y])
+                    continue;   
+                
                 visited[n.X, n.Y] = true;
                 distances[n.X, n.Y] = distances[c.X, c.Y];
                 q.Enqueue(n);
