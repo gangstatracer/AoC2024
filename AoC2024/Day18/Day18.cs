@@ -39,6 +39,6 @@ public class Day18
             return;
         
         foreach(var direction in CoordinateExtensions.Directions)
-            Search(memory, visited, c.MoveTo(direction), distance + 1);
+            Search(memory, distances, c.MoveTo(direction), distance + 1);
     }
 }
