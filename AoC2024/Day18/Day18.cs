@@ -1,9 +1,9 @@
-namespace AoC2024.Day17;
+namespace AoC2024.Day18;
 
-public class Day17
+public class Day18
 {
-    [TestCase("Day17/example.txt", 12, 6, 22)]
-    [TestCase("Day17/input.txt", 1024, 70, 0)]
+    [TestCase("Day18/example.txt", 12, 6, 22)]
+    [TestCase("Day18/input.txt", 1024, 70, 0)]
     public void Task1(string filePath, int bytesFallen, int mapSize, int expected)
     {
         var bytes = File
