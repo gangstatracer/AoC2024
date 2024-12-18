@@ -54,8 +54,8 @@ public class Day18
         return distances[mapSize - 1, mapSize - 1];
     }
 
-    [TestCase("Day18/example.txt", 12, 7, "6,1")]
-    [TestCase("Day18/input.txt", 1024, 71, "")]
+    [TestCase("Day18/example.txt", 12, 7, "1,6")]
+    [TestCase("Day18/input.txt", 1024, 71, "26,28")]
     public void Task1(string filePath, int bytesFallen, int mapSize, string expected)
     {
         var bytes = File
