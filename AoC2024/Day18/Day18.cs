@@ -31,7 +31,7 @@ public class Day18
     private static void Search(bool[,] memory, int[,] distances, Coordinate c, int distance)
     {
         if(!memory.TryGetValue(c, out var m) || m)
-            return int.MaxValue;
+            return;
         
         if(distances[c.X,c.Y] > distance)
             distances[c.X, c.Y] = distance;
