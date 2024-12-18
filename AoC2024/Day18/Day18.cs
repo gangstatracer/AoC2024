@@ -24,7 +24,10 @@ public class Day18
         for(var i = 0; i < bytesFallen; i++)
             memory.TrySetValue(bytes[i], true);
 
-        var q = new Queue<Coordinate>{new Coordinate(0,0)};
+        var q = new Queue<Coordinate>();
+        
+        q.Enqueue(new Coordinate(0,0));
+
         while(q.TryDequeue(out var c))
         {
             foreach(var n in CoordinateExtensions.Directions.Select(d => c.MoveTo(d)))
