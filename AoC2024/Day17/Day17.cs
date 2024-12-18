@@ -29,7 +29,7 @@ public class Day17
         string.Join(',', machine.Output).Should().Be(expected);
     }
 
-    [Ignore]
+    [Ignore("long running")]
     [TestCase("Day17/example2.txt", 117440)]
     [TestCase("Day17/input.txt", 0)]
     public void Task2(string filePath, int expected)
