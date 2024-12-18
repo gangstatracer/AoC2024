@@ -11,7 +11,9 @@ public class Day18
         .Select(l => 
         {
             var parts = l.Split(',');
-            return new Coordinate(int.Parse(parts[0]), int.Parse(parts[1]));
+            return new Coordinate(
+                int.Parse(parts[0]) - 1, 
+                int.Parse(parts[1]) - 1);
         })
         .ToArray();
 
