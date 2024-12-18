@@ -41,7 +41,7 @@ public class Day18
                     continue;   
                 
                 visited[n.X, n.Y] = true;
-                distances[n.X, n.Y] = distances[c.X, c.Y];
+                distances[n.X, n.Y] = distances[c.X, c.Y] + 1;
                 q.Enqueue(n);
             }
         }
