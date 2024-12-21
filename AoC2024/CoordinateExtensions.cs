@@ -26,4 +26,13 @@ public static class CoordinateExtensions
         new(1, 1),
         new(1, -1),
     ];
+
+    public static IEnumerable<Coordinate> AllCoordinates<T>(this T[,] array)
+    {
+        var x = array.GetLength(0);
+        var y = array.GetLength(1);
+        for (var i = 0; i < x; i++)
+            for (var j = 0; j < y; j++)
+                yield return new Coordinate(i, j);
+    }
 }
